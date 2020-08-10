@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   <!-- <properties resource="jdbc.properties">
+        <property name="password" value="root"/>
+    </properties>-->
+<!--    properties标签专门是读取jdbc文件或者设置相关属性-->
+<!--    当Properties对象出现多个相同Key 以第一个Key的Value为准-->
+<!--    按照xml配置从上至下顺序写，否则会报错-->
+    <properties resource="jdbc.properties">
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+    </properties>
+<!--    环境配置，默认的不需要修改，<environment></environment>可以有多个-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--修改数据库的四个连接属性-->
+                <property name="driver" value="${driverClassName}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--导入需要的sql语句,可以导入多个-->
+    <mappers>
+        <mapper resource="com/atguigu/dao/UserMapper.xml"/>
+    </mappers>
+</configuration>
